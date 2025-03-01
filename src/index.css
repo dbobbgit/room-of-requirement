@@ -1,21 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
-body {
-  margin: 0;
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #121212;
-  color: #E9E9E9;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply m-0 font-plex antialiased bg-background text-text-primary;
+  }
+
+  code {
+    @apply font-mono;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  /* Add any component styles here */
+  .magic-container {
+    @apply min-h-screen flex flex-col bg-background text-text-primary overflow-hidden;
+  }
+}
+
+@layer utilities {
+  /* Add any custom utilities here */
+  .scrollbar-custom {
+    @apply scrollbar-thin scrollbar-track-background-accent scrollbar-thumb-ui-border hover:scrollbar-thumb-accent-primary;
+  }
 }
 
 /* Custom scrollbar for the whole app */
@@ -52,4 +66,177 @@ button {
 /* Ensure proper text rendering on dark backgrounds */
 * {
   text-rendering: optimizeLegibility;
+}
+
+/* Custom keyframe animations for the spray paint effect */
+@keyframes spatterIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+@keyframes dripIn {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: var(--final-height);
+  }
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.3;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  30% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes horizontalShift {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Added keyframes for enhanced glitch effects */
+@keyframes glitchFlipX {
+  0% {
+    transform: perspective(400px) rotateX(0deg);
+  }
+  30% {
+    transform: perspective(400px) rotateX(180deg) scale(1.2);
+  }
+  70% {
+    transform: perspective(400px) rotateX(-30deg) scale(0.8);
+  }
+  100% {
+    transform: perspective(400px) rotateX(0deg);
+  }
+}
+
+@keyframes glitchFlipY {
+  0% {
+    transform: perspective(400px) rotateY(0deg);
+  }
+  30% {
+    transform: perspective(400px) rotateY(180deg) scale(1.2);
+  }
+  70% {
+    transform: perspective(400px) rotateY(-40deg) scale(0.9);
+  }
+  100% {
+    transform: perspective(400px) rotateY(0deg);
+  }
+}
+
+@keyframes glitchSlideUp {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes glitchSlideDown {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(15px);
+  }
+  60% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes glitchJitter {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5px, 3px);
+  }
+  20% {
+    transform: translate(5px, -3px);
+  }
+  30% {
+    transform: translate(3px, 5px);
+  }
+  40% {
+    transform: translate(-3px, -5px);
+  }
+  50% {
+    transform: translate(5px, 2px);
+  }
+  60% {
+    transform: translate(-2px, -4px);
+  }
+  70% {
+    transform: translate(4px, 5px);
+  }
+  80% {
+    transform: translate(-5px, -2px);
+  }
+  90% {
+    transform: translate(3px, 4px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes glitchScanlines {
+  0% {
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.3) 50%);
+    background-size: 100% 4px;
+  }
+  100% {
+    background: none;
+  }
 }

@@ -1,13 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Typography, Box, Paper, Button, Stack } from '@mui/material';
-import MovieIcon from '@mui/icons-material/Movie';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import AddIcon from '@mui/icons-material/Add';
+import { cn, getCategoryColorClasses } from '../utils/tailwindUtils';
 import MainLayout from '../components/layout/MainLayout';
-import { colors } from '../utils/theme';
+import GlitchTitle from '../components/effects/GlitchTitle';
+
+import { MovieIcon, SportsEsportsIcon, MenuBookIcon, MusicNoteIcon, AddIcon } from '../components/icons/index';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -15,36 +12,36 @@ const HomePage = () => {
   const categories = [
     {
       title: 'Movies',
-      icon: <MovieIcon sx={{ fontSize: 40 }} />,
-      description: 'Browse your favorite films and discover classics',
-      color: colors.accent.primary,
+      icon: <MovieIcon className="text-4xl" />,
+      description: 'Life\'s too short to watch bad movies—unless we\'re roasting them together.',
+      color: 'accent-primary',
       path: '/movies',
       addPath: '/add/movie',
       count: 24
     },
     {
       title: 'Games',
-      icon: <SportsEsportsIcon sx={{ fontSize: 40 }} />,
-      description: 'Explore your gaming collection from all platforms',
-      color: colors.accent.secondary,
+      icon: <SportsEsportsIcon className="text-4xl" />,
+      description: 'A family that plays together, stays together—unless someone rage quits',
+      color: 'accent-secondary',
       path: '/games',
       addPath: '/add/game',
       count: 16
     },
     {
       title: 'Books',
-      icon: <MenuBookIcon sx={{ fontSize: 40 }} />,
-      description: 'Your digital library at your fingertips',
-      color: colors.accent.tertiary,
+      icon: <MenuBookIcon className="text-4xl" />,
+      description: 'A good book should be read twice—once by you, once by me.',
+      color: 'accent-tertiary',
       path: '/books',
       addPath: '/add/book',
       count: 10
     },
     {
       title: 'Music',
-      icon: <MusicNoteIcon sx={{ fontSize: 40 }} />,
-      description: 'Listen to your favorite albums and tracks',
-      color: colors.accent.quaternary,
+      icon: <MusicNoteIcon className="text-4xl" />,
+      description: 'No skips, no complaints—family DJ rules (enforced poorly).',
+      color: 'accent-quaternary',
       path: '/music',
       addPath: '/add/music',
       count: 12
@@ -65,158 +62,74 @@ const HomePage = () => {
       navigate(path);
     }
   };
-
+  
   return (
     <MainLayout>
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 8 }}>
-        <Box sx={{ mb: 6, textAlign: 'center' }}>
-          <Typography 
-            variant="h2" 
-            component="h1" 
-            gutterBottom 
-            sx={{ 
-              fontFamily: '"Cinzel", serif',
-              fontWeight: 700,
-              mb: 2,
-              background: `linear-gradient(45deg, ${colors.accent.primary}, ${colors.accent.gold})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Room of Requirement
-          </Typography>
-          <Typography 
-            variant="h5"
-            sx={{ 
-              fontFamily: '"Playfair Display", serif',
-              mb: 4,
-              color: colors.text.secondary
-            }}
-          >
-            Your family's digital collection
-          </Typography>
-        </Box>
+      <div className="container mx-auto mt-4 mb-8 px-4">
+        {/* Use the new GlitchTitle component */}
+        <GlitchTitle 
+          title="Room of Requirement"
+          // Optional customization - default values will be used if not provided
+          // glitchColors={{ primary: '#ff0099', secondary: '#00ffff', accent: '#ffff00' }}
+          // spatterCount={56}
+          // debugMode={false}
+          // verticalOffset={40}
+        />
+        
+        <p className="font-playfair mb-4 mt-12 text-text-secondary max-w-[800px] mx-auto leading-normal px-2">
+          The first rule of the Room of Requirement: The Room picks the movie or game. The second rule of the Room of Requirement: YOU SUBMIT TO THE ROOM.
+        </p>
 
-        <Box sx={{ mb: 6 }}>
-          <Typography 
-            variant="h4" 
-            component="h2" 
-            gutterBottom
-            sx={{ 
-              fontFamily: '"Playfair Display", serif',
-              borderBottom: `1px solid ${colors.ui.divider}`,
-              pb: 1,
-              mb: 3
-            }}
-          >
+        <div className="mb-6">
+          <h2 className="font-playfair border-b border-ui-divider pb-1 mb-3 text-2xl">
             Your Collection
-          </Typography>
+          </h2>
           
-          <Stack 
-            direction="row" 
-            flexWrap="wrap" 
-            spacing={3} 
-            useFlexGap
-          >
-            {categories.map((category) => (
-              <Box 
-                key={category.title}
-                sx={{
-                  width: {
-                    xs: '100%',
-                    sm: 'calc(50% - 12px)',
-                    md: 'calc(25% - 18px)'
-                  }
-                }}
-              >
-                <Paper 
-                  elevation={3}
-                  onClick={() => handleCategoryClick(category.path)}
-                  sx={{
-                    p: 3,
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    background: `linear-gradient(135deg, ${colors.background.paper} 0%, ${colors.background.accent} 100%)`,
-                    borderLeft: `4px solid ${category.color}`,
-                    transition: 'all 0.3s ease-in-out',
-                    cursor: 'pointer',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                      boxShadow: 6,
-                    },
-                  }}
+          <div className="flex flex-wrap -mx-2">
+            {categories.map((category) => {
+              const colors = getCategoryColorClasses(category.color);
+              
+              return (
+                <div 
+                  key={category.title}
+                  className="w-full sm:w-1/2 md:w-1/4 p-2"
                 >
-                  <Box 
-                    sx={{ 
-                      display: 'flex', 
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      mb: 2,
-                      p: 1.5,
-                      borderRadius: '50%',
-                      width: 64,
-                      height: 64,
-                      backgroundColor: `${category.color}15`,
-                      color: category.color,
-                      margin: '0 auto 16px'
-                    }}
+                  <div 
+                    onClick={() => handleCategoryClick(category.path)}
+                    className={cn(
+                      "p-3 h-full flex flex-col bg-gradient-to-br from-background-paper to-background-accent rounded shadow-md transition-all duration-300 cursor-pointer hover:translate-y-[-4px] hover:shadow-lg",
+                      colors.border
+                    )}
                   >
-                    {category.icon}
-                  </Box>
-                  
-                  <Typography 
-                    variant="h5" 
-                    component="h3"
-                    align="center"
-                    gutterBottom
-                    sx={{ 
-                      fontFamily: '"Cinzel", serif',
-                      fontWeight: 600,
-                      color: category.color
-                    }}
-                  >
-                    {category.title}
-                  </Typography>
-                  
-                  <Typography variant="body2" color="textSecondary" align="center" sx={{ mb: 2 }}>
-                    {category.description}
-                  </Typography>
-                  
-                  <Typography 
-                    variant="body1" 
-                    align="center" 
-                    sx={{ 
-                      mt: 'auto',
-                      mb: 1,
-                      fontWeight: 500,
-                      color: colors.text.primary
-                    }}
-                  >
-                    {category.count} items
-                  </Typography>
-                  
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<AddIcon />}
-                    onClick={(e) => handleAddClick(category.addPath, false, e)}
-                    sx={{
-                      mt: 'auto',
-                      backgroundColor: category.color,
-                      '&:hover': {
-                        backgroundColor: `${category.color}dd`,
-                      }
-                    }}
-                  >
-                    Add New {category.title.slice(0, -1)}
-                  </Button>
-                </Paper>
-              </Box>
-            ))}
-          </Stack>
-        </Box>
-      </Container>
+                    <div className={cn("flex items-center justify-center mb-2 p-1.5 rounded-full w-16 h-16 mx-auto mb-4", colors.bgLight, colors.text)}>
+                      {category.icon}
+                    </div>
+                    
+                    <h3 className={cn("font-cinzel font-semibold text-center text-xl mb-2", colors.text)}>
+                      {category.title}
+                    </h3>
+                    
+                    <p className="text-text-secondary text-center text-sm mb-2">
+                      {category.description}
+                    </p>
+                    
+                    <p className="mt-auto mb-1 font-medium text-text-primary text-center">
+                      {category.count} items
+                    </p>
+                    
+                    <button
+                      onClick={(e) => handleAddClick(category.addPath, false, e)}
+                      className={cn("mt-auto px-4 py-2 rounded font-cinzel flex items-center justify-center text-text-primary transition-colors", colors.bg, colors.bgHover)}
+                    >
+                      <AddIcon className="mr-1" /> Add New {category.title.slice(0, -1)}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </MainLayout>
   );
 };

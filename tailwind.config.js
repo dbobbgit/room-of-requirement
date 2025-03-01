@@ -35,6 +35,12 @@ module.exports = {
         'accent-secondary': '#64ffda',
         'accent-tertiary': '#ffab40',
         'accent-quaternary': '#448aff',
+        'fight-club': {
+          dark: '#101010',
+          'green-dark': '#0e100e',
+          pink: '#ff0099',
+          'pink-dark': '#cc0077',
+        },
       },
       fontFamily: {
         cinzel: ['Cinzel', 'serif'],
@@ -54,6 +60,7 @@ module.exports = {
         glitchSlideUp: 'glitchSlideUp 300ms ease-out forwards',
         glitchSlideDown: 'glitchSlideDown 300ms ease-out forwards',
         glitchJitter: 'glitchJitter 250ms steps(5) infinite',
+        'subtle-flicker': 'subtleFlicker 8s ease-in-out infinite',
       },
       keyframes: {
         spatterIn: {
@@ -109,6 +116,10 @@ module.exports = {
           '90%': { transform: 'translate(3px, 4px)' },
           '100%': { transform: 'translate(0, 0)' },
         },
+        subtleFlicker: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.92' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -116,6 +127,14 @@ module.exports = {
           'radial-gradient(ellipse at center, rgba(255,0,153,0.05) 0%, rgba(255,0,153,0) 70%)',
         'radial-fade':
           'radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)',
+        'fight-club-texture':
+          "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
+        'fight-club-scratches':
+          "url(\"data:image/svg+xml,%3Csvg width='500' height='500' viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,250 L450,250' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/%3E%3Cpath d='M250,50 L250,450' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/%3E%3Cpath d='M100,100 L400,400' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Cpath d='M400,100 L100,400' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3C/svg%3E\")",
+        'fight-club-gradient':
+          'linear-gradient(135deg, rgba(9,32,20,0.4) 0%, rgba(20,20,20,0.2) 100%)',
+        'fight-club-vignette':
+          'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%)',
       },
       boxShadow: {
         'pink-glow':
@@ -203,6 +222,60 @@ module.exports = {
         },
       };
       addUtilities(newUtilities);
+    },
+    function ({ addComponents, theme }) {
+      addComponents({
+        '.fight-club-bg': {
+          position: 'relative',
+          '&::before, &::after': {
+            content: '""',
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+          },
+          '&::before': {
+            background: theme('backgroundImage.fight-club-gradient'),
+            zIndex: '-10',
+          },
+          '&::after': {
+            backgroundImage: theme('backgroundImage.fight-club-vignette'),
+            zIndex: '-6',
+          },
+        },
+        '.fight-club-noise': {
+          '&::before': {
+            content: '""',
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            backgroundImage: theme('backgroundImage.fight-club-texture'),
+            opacity: '0.35',
+            mixBlendMode: 'multiply',
+            zIndex: '-8',
+            pointerEvents: 'none',
+          },
+        },
+        '.fight-club-scratches': {
+          '&::before': {
+            content: '""',
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            backgroundImage: theme('backgroundImage.fight-club-scratches'),
+            backgroundSize: 'cover',
+            opacity: '0.15',
+            zIndex: '-7',
+            pointerEvents: 'none',
+          },
+        },
+      });
     },
   ],
 };

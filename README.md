@@ -1,10 +1,10 @@
 # Room of Requirement - Media Collection App
 
-A stylish, personal media collection app with a magical theme, inspired by cyberpunk, dark academia, and Hogwarts aesthetics.
+A stylish, personal media collection app inspired by cyberpunk, dark academia, and Hogwarts aesthetics.
 
 ## Features
 
-- Catalog your Movies, Games, Books, and Music in one place
+- Catalog Movies, Games, Books, and Music in one place
 - Search external APIs to automatically fill in details
 - Beautiful UI with responsive design
 - Share items with family members
@@ -16,10 +16,10 @@ This app integrates with several free APIs to fetch media data:
 ### Currently Implemented:
 
 - **The Movie Database (TMDB)** - For movie data including posters, directors, and descriptions
-- **RAWG Video Games Database** - For game data including cover art, platforms, and ratings
 
 ### Coming Soon:
 
+- **RAWG Video Games Database** - For game data including cover art, platforms, and ratings
 - **Google Books API** - For book data
 - **Last.fm API** - For music data
 

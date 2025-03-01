@@ -6,11 +6,18 @@ import MovieIcon from '@mui/icons-material/Movie';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import { ReqRoomIcon } from '../icons';
 import { colors } from '../../utils/theme';
 import NavLink from '../navigation/NavLink';
 
 const SideNavigation = () => {
   const menuItems = [
+    {
+      text: 'The Req Room',
+      icon: <ReqRoomIcon />,
+      route: '/req-room',
+      disabled: false
+    },
     {
       text: 'Movies',
       icon: <MovieIcon />,

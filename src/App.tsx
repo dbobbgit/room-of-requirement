@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import HomePage from './pages/HomePage';
 import MediaListPage from './pages/MediaListPage';
 import AddMediaPage from './pages/AddMediaPage';
+import ReqRoomPage from './pages/ReqRoomPage';
 
 function App() {
   // Mock authentication state - in a real app, this would come from your auth context
@@ -23,6 +24,15 @@ function App() {
           <Route 
             path="/" 
             element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />} 
+          />
+          
+          <Route 
+            path="/req-room" 
+            element={
+              isAuthenticated ? 
+              <ReqRoomPage /> : 
+              <Navigate to="/login" />
+            } 
           />
           
           <Route 

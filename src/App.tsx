@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import { theme } from './utils/theme';
 import './App.css';
 
 // Import pages
@@ -15,8 +13,7 @@ function App() {
   const isAuthenticated = true; // Set to true for development to see the main UI
   
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <div className="min-h-screen bg-background-main text-text-primary">
       <BrowserRouter>
         <Routes>
           {/* Public routes */}
@@ -77,7 +74,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
-    </ThemeProvider>
+    </div>
   );
 }
 

@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Box, Stack, Container } from '@mui/material';
-import AppHeader from '../../components/layout/AppHeader';
-import SideNavigation from '../../components/layout/SideNavigation';
-import { MagicContainer } from '../../utils/StyledComponents';
+import AppHeader from './AppHeader';
+import SideNavigation from './SideNavigation';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -10,38 +8,19 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <MagicContainer>
-      <Stack direction="column" sx={{ height: '100%' }}>
+    <div className="min-h-screen flex flex-col bg-background-main text-text-primary">
+      <div className="flex flex-col h-full">
         <AppHeader />
-        <Stack 
-          direction="row" 
-          sx={{ 
-            flex: 1,
-            overflow: 'hidden' 
-          }}
-        >
-          <Box 
-            sx={{ 
-              width: { xs: '100%', md: '25%', lg: '16.666%' },
-              display: { xs: 'none', md: 'block' }
-            }}
-          >
+        <div className="flex flex-row flex-1 overflow-hidden">
+          <div className="w-full md:w-1/4 lg:w-1/6 hidden md:block">
             <SideNavigation />
-          </Box>
-          <Box 
-            component="main" 
-            sx={{ 
-              flex: 1,
-              p: 3, 
-              overflow: 'auto',
-              width: { xs: '100%', md: '75%', lg: '83.333%' },
-            }}
-          >
+          </div>
+          <main className="flex-1 p-3 overflow-auto w-full md:w-3/4 lg:w-5/6">
             {children}
-          </Box>
-        </Stack>
-      </Stack>
-    </MagicContainer>
+          </main>
+        </div>
+      </div>
+    </div>
   );
 };
 

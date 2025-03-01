@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, List, Typography } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import MovieIcon from '@mui/icons-material/Movie';
@@ -10,8 +10,6 @@ import { colors } from '../../utils/theme';
 import NavLink from '../navigation/NavLink';
 
 const SideNavigation = () => {
-  const navigate = useNavigate();
-  
   const menuItems = [
     {
       text: 'Movies',

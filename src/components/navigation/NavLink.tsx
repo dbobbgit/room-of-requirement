@@ -62,7 +62,7 @@ const NavLink: React.FC<NavLinkProps> = ({
   const location = useLocation();
   const isActive = exact 
     ? location.pathname === to 
-    : location.pathname.startsWith(to) && to !== '/' || location.pathname === to;
+    : (location.pathname.startsWith(to) && to !== '/') || location.pathname === to;
 
   if (disabled) {
     return (

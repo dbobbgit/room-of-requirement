@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+# Room of Requirement - Media Collection App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A stylish, personal media collection app with a magical theme, inspired by cyberpunk, dark academia, and Hogwarts aesthetics.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Catalog your Movies, Games, Books, and Music in one place
+- Search external APIs to automatically fill in details
+- Beautiful UI with responsive design
+- Share items with family members
 
-### `npm start`
+## API Integration
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This app integrates with several free APIs to fetch media data:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Currently Implemented:
 
-### `npm test`
+- **The Movie Database (TMDB)** - For movie data including posters, directors, and descriptions
+- **RAWG Video Games Database** - For game data including cover art, platforms, and ratings
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Coming Soon:
 
-### `npm run build`
+- **Google Books API** - For book data
+- **Last.fm API** - For music data
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Create a `.env` file in the root directory using the `.env.example` as a template
+4. Sign up for API keys:
+   - TMDB API: https://www.themoviedb.org/signup
+   - RAWG API: https://rawg.io/apidocs
+   - Last.fm API: https://www.last.fm/api/account/create
+5. Add your API keys to the `.env` file:
+   ```
+   REACT_APP_TMDB_API_KEY=your_tmdb_api_key_here
+   REACT_APP_RAWG_API_KEY=your_rawg_api_key_here
+   ```
+6. Start the development server:
+   ```
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Using the App
 
-### `npm run eject`
+### Adding Movies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Navigate to Movies and click "Add New Movie"
+2. Use the TMDB search to find your movie
+3. Review and edit the auto-filled details
+4. Click "Add to Collection"
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Adding Games
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Navigate to Games and click "Add New Game"
+2. Use the RAWG search to find your game
+3. Review and edit the auto-filled details
+4. Click "Add to Collection"
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Adding Other Media
 
-## Learn More
+1. Navigate to the desired category (Books, Music)
+2. Click "Add New"
+3. Fill in the details manually or use the appropriate API search (coming soon)
+4. Click "Add to Collection"
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Notes for Developers
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Environment Variables
+
+- The app uses environment variables like `REACT_APP_TMDB_API_KEY` and `REACT_APP_RAWG_API_KEY` to access APIs
+- Never commit your `.env` file with actual API keys to version control
+- In production, set these variables in your hosting environment
+
+### API Services
+
+- API service files are in `src/services/`
+- Each API has its own TypeScript file with interfaces and helper functions
+- API responses are mapped to a common format for the app
+
+## License
+
+MIT

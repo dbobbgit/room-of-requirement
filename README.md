@@ -82,6 +82,10 @@ This app integrates with several free APIs to fetch media data:
 - Each API has its own TypeScript file with interfaces and helper functions
 - API responses are mapped to a common format for the app
 
+### Git Branch Naming
+
+This project uses `main` as the default branch name instead of `master` to align with GitHub's current standards and to use more inclusive language.
+
 ## License
 
 MIT

@@ -240,3 +240,160 @@ button {
     background: none;
   }
 }
+
+/* Custom overrides */
+.no-glow {
+  box-shadow: none !important;
+}
+.no-glow h1 {
+  box-shadow: none !important;
+}
+.no-glow h1 > div {
+  box-shadow: none !important;
+}
+
+/* Ensure rendered letters always remain visible */
+.render-complete span {
+  opacity: 1 !important; /* Prevent letters from becoming transparent */
+  visibility: visible !important; /* Ensure letters are always visible */
+  display: inline-block !important; /* Prevent display:none from hiding letters */
+  transform: none !important; /* Prevent transform from moving letters off-screen */
+  filter: none !important; /* Remove any filter that might hide letters */
+  animation: none !important; /* Stop any animations that might hide letters */
+}
+
+/* Ensure the actual character is displayed correctly */
+[data-render-complete="true"] span {
+  color: inherit !important; /* Ensure text color is visible */
+  text-shadow: inherit !important; /* Maintain consistent text shadow */
+}
+
+/* Custom overrides for Fight Club titles */
+.compact-glitch-title {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.compact-glitch-title > div {
+  height: auto !important;
+  min-height: auto !important;
+}
+
+.compact-glitch-title .relative.flex.justify-center.items-center.w-full.overflow-visible {
+  height: auto !important;
+}
+
+/* Fix inner content padding */
+.compact-glitch-title h1 {
+  padding: 0 !important;
+}
+
+/* Allow control of GlitchTitle spacing */
+.fc-title-container {
+  position: relative;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+.fc-title-therulesof {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.2);
+  transform-origin: center top;
+  z-index: 10;
+}
+
+/* Combined title approach that doesn't use percentages */
+.fc-title-combined {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  white-space: nowrap;
+  z-index: 5;
+  gap: 8px;
+  min-height: 150px;
+}
+
+.fc-title-room {
+  position: relative;
+  margin-right: 0;
+  letter-spacing: normal;
+}
+
+.fc-title-req {
+  position: relative;
+  letter-spacing: normal;
+  transform: translateY(30px);
+  align-self: flex-start;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .fc-title-therulesof {
+    transform: translateX(-50%) scale(0.18);
+    top: 60px;
+  }
+  
+  .fc-title-combined {
+    transform: translateX(-50%) scale(0.9);
+    top: 100px;
+  }
+  
+  .fc-title-req {
+    transform: translateY(30px);
+  }
+}
+
+@media (max-width: 640px) {
+  .fc-title-container {
+    min-height: 240px;
+  }
+  
+  .fc-title-therulesof {
+    transform: translateX(-50%) scale(0.16);
+    top: 50px;
+  }
+  
+  .fc-title-combined {
+    transform: translateX(-50%) scale(0.8);
+    top: 80px;
+  }
+  
+  .fc-title-req {
+    transform: translateY(25px);
+  }
+}
+
+/* Make spatter container smaller */
+.compact-glitch-title .spatterContainer {
+  top: -10px !important;
+  left: -10px !important;
+  right: -10px !important;
+  bottom: -10px !important;
+}
+
+/* Make spatter container smaller for the combined titles */
+.fc-title-combined .compact-glitch-title .spatterContainer {
+  top: -8px !important;
+  left: -8px !important;
+  right: -8px !important;
+  bottom: -8px !important;
+}
+
+/* Ensure the title characters don't have extra spacing */
+.fc-title-combined .compact-glitch-title h1 {
+  letter-spacing: normal !important;
+}

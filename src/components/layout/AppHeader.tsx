@@ -5,6 +5,11 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { OrnateHeader, GlowingText } from '../../utils/StyledComponents';
 import { colors } from '../../utils/theme';
 
+// Import the Special Elite font if not already imported elsewhere
+// You might need to add this font to your project if it's not already included
+// Add this to public/index.html or equivalent:
+// <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
 const AppHeader: React.FC = () => {
   return (
     <OrnateHeader>

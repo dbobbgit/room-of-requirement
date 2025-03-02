@@ -33,14 +33,14 @@ const ReqRoomPage: React.FC = () => {
   useEffect(() => {
     // Create varied offsets for horizontal positioning like in the poster
     const offsets = [
-      20,   // Rule 1 - moderate indent
-      40,   // Rule 2 - larger indent
-      15,   // Rule 3 - slight indent
-      65,   // Rule 4 - significant indent
-      30,   // Rule 5 - moderate indent
-      5,    // Rule 6 - minimal indent
+      40,   // Rule 1 - moderate indent
+      10,   // Rule 2 - larger indent
+      60,   // Rule 3 - slight indent
+      10,   // Rule 4 - significant indent
+      75,   // Rule 5 - moderate indent
+      20,    // Rule 6 - minimal indent
       50,   // Rule 7 - larger indent
-      25    // Rule 8 - moderate indent
+      40    // Rule 8 - moderate indent
     ];
     
     // Subtle rotations for each rule to create the hand-applied look
@@ -66,23 +66,51 @@ const ReqRoomPage: React.FC = () => {
           {/* Main container with overflow control */}
           <div className="container mx-auto mt-4 mb-8 px-4 max-w-full overflow-x-hidden">
             {/* Title with Fight Club styling */}
-            <div className="mb-16 mt-8">
-              <GlitchTitle 
-                title="THE RULES OF"
-                className="text-center mb-2"
-                glitchColors={{ primary: '#ff0099', secondary: '#00ffff', accent: '#ffff00' }}
-                spatterCount={20}
-                verticalOffset={30}
-                glitchIntensity={1.2}
-              />
-              <GlitchTitle 
-                title="REQUIREMENT"
-                className="text-center"
-                glitchColors={{ primary: '#ff0099', secondary: '#00ffff', accent: '#ffff00' }}
-                spatterCount={40}
-                verticalOffset={30}
-                glitchIntensity={1.6}
-              />
+            <div className="mx-auto py-10 flex justify-center items-center w-full">
+              {/* Container for all title elements */}
+              <div className="fc-title-container">
+                {/* Small "THE RULES OF" text at top right */}
+                <div className="fc-title-therulesof">
+                  <GlitchTitle 
+                    title="THE RULES OF"
+                    className="whitespace-nowrap no-glow compact-glitch-title"
+                    glitchColors={{ primary: '#ff0099', secondary: '#00ffff', accent: '#ffff00' }}
+                    spatterCount={6}
+                    verticalOffset={0}
+                    glitchIntensity={0.9}
+                    debugMode={false}
+                  />
+                </div>
+                
+                {/* Combined "REQ ROOM" title - positioned in center */}
+                <div className="fc-title-combined">
+                  {/* "REQ" title positioned on the left */}
+                  <div className="fc-title-room">
+                    <GlitchTitle 
+                      title="REQ"
+                      className="whitespace-nowrap no-glow compact-glitch-title"
+                      glitchColors={{ primary: '#ff0099', secondary: '#00ffff', accent: '#ffff00' }}
+                      spatterCount={30}
+                      verticalOffset={0}
+                      glitchIntensity={1.4}
+                      debugMode={false}
+                    />
+                  </div>
+
+                  {/* "ROOM" title positioned on the right */}
+                  <div className="fc-title-req">
+                    <GlitchTitle 
+                      title="ROOM"
+                      className="whitespace-nowrap no-glow compact-glitch-title"
+                      glitchColors={{ primary: '#ff0099', secondary: '#00ffff', accent: '#ffff00' }}
+                      spatterCount={35}
+                      verticalOffset={0}
+                      glitchIntensity={1.5}
+                      debugMode={false}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             
             {/* Rules list with Fight Club styling */}

@@ -187,6 +187,9 @@ const GlitchTitle: React.FC<GlitchTitleProps> = ({
     // Track animation completion to ensure final state is correct
     const animationComplete = useRef(false);
     
+    // Add a new ref to track when the letter has successfully rendered
+    const renderComplete = useRef(false);
+    
     // Setup random offsets for each letter
     const xOffset = useRef((Math.random() - 0.5) * 6); // Increased range
     const yOffset = useRef((Math.random() - 0.5) * 4); // Increased range
@@ -322,12 +325,33 @@ const GlitchTitle: React.FC<GlitchTitleProps> = ({
     // Extra safety effect - ensure original letter persists in final state
     useEffect(() => {
       // When component unmounts or anytime animation completes, force proper letter
+      
+      // Add an additional safety timer to ensure letter is always visible
+      const permanentLetterCheck = setInterval(() => {
+        // If for any reason the letter isn't displaying correctly, force restore
+        if (displayedChar !== originalLetter.current) {
+          setDisplayedChar(originalLetter.current);
+        }
+        if (isGlitched && renderComplete.current) {
+          // If letter is stuck in glitched state, reset it
+          setIsGlitched(false);
+          setGlitchType('none');
+        }
+      }, 500); // Check every 500ms
+      
+      // Set renderComplete to true after a delay to ensure initial animations can happen
+      const initialRenderTimer = setTimeout(() => {
+        renderComplete.current = true;
+      }, initialDelay + (index * staggerDelay * 1000) + 2000);
+      
       return () => {
         // Final cleanup to ensure proper letter
         setDisplayedChar(originalLetter.current);
         setIsGlitched(false);
+        clearInterval(permanentLetterCheck);
+        clearTimeout(initialRenderTimer);
       };
-    }, []);
+    }, [index]);
     
     // Calculate glitch styles based on current state and glitch type
     const getGlitchStyles = () => {
@@ -425,6 +449,12 @@ const GlitchTitle: React.FC<GlitchTitleProps> = ({
         style={{
           ...getGlitchStyles()
         }}
+        onAnimationComplete={() => {
+          // Ensure correct letter is displayed when animation completes
+          animationComplete.current = true;
+          setDisplayedChar(originalLetter.current);
+          setIsGlitched(false);
+        }}
       >
         {isSpace ? '\u00A0' : displayedChar}
       </motion.span>
@@ -433,10 +463,24 @@ const GlitchTitle: React.FC<GlitchTitleProps> = ({
 
   // Cleanup function for any lingering timeouts
   useEffect(() => {
+    // Add a global failsafe timer to ensure all letters are visible after animations
+    const globalFailsafe = setTimeout(() => {
+      // This fires once, after all animations should be complete
+      const titleElement = document.querySelector(`h1[data-title="${title}"]`);
+      if (titleElement) {
+        // Apply a data attribute to guarantee the title is visible
+        titleElement.setAttribute('data-render-complete', 'true');
+        
+        // Add a class that prevents any glitch effects that could hide letters
+        titleElement.classList.add('render-complete');
+      }
+    }, initialDelay * 1000 + (letters.length * staggerDelay * 1000) + 3000); // Wait for all animations plus 3 seconds
+    
     return () => {
       // Global cleanup
+      clearTimeout(globalFailsafe);
     };
-  }, []);
+  }, [letters.length, title]);
 
   return (
     <div className={cn("my-16 relative flex flex-col items-center", className)} style={titleStyles}>
@@ -502,6 +546,7 @@ const GlitchTitle: React.FC<GlitchTitleProps> = ({
           <h1 
             className={cn(FIGHT_CLUB_STYLES.heading, "shadow-pink-glow")}
             style={getDebugStyle()}
+            data-title={title}
           >
             <div 
               className="flex items-center justify-center w-full h-full"
